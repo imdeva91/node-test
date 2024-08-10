@@ -1,6 +1,6 @@
 const dotenv=require('dotenv')
-const app=require('./app.js')
-const connectDb=require('./utils/DBConfig.utils.js')
+const app=require('./src/app.js')
+const connectDb=require('./src/utils/DBConfig.utils.js')
 const cloudinary=require('cloudinary')
 
 dotenv.config()
