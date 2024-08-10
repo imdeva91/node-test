@@ -13,32 +13,26 @@ const {accessTokenOptions, refreshTokenOptions, sendToken}=require("../utils/Jwt
 
 // ############################ Register User #########################################
  const registrationUser = CatchAsyncError(async (req, res, next) => {
-
+    const { fullname, email, password, terms_conditions,username } = req.body ;
+    const isEmailExist = await UserModel.findOne({ email })
+    if (isEmailExist) {
+        return next(new ErrorHandler('Email already exist', 400))
+    }
+    const user = { fullname, email, password, terms_conditions };
+    const activationToken = createActivationToken(user);
+    const activationCode = activationToken.activationCode;
+    const data = { user: { name: user.name }, activationCode }
+    await sendEmail({
+        email: user.email,
+        subject: "Activate your account",
+        template: "activation-mail.ejs",
+        data
+    })
     res.status(201).json({
         success: true,
-        message: `Please check your mail: to activate your account`,
-       
+        message: `Please check your mail: ${user.email} to activate your account`,
+       token: activationToken.token
     })
-    // const { fullname, email, password, terms_conditions,username } = req.body ;
-    // const isEmailExist = await UserModel.findOne({ email })
-    // if (isEmailExist) {
-    //     return next(new ErrorHandler('Email already exist', 400))
-    // }
-    // const user = { fullname, email, password, terms_conditions };
-    // const activationToken = createActivationToken(user);
-    // const activationCode = activationToken.activationCode;
-    // const data = { user: { name: user.name }, activationCode }
-    // await sendEmail({
-    //     email: user.email,
-    //     subject: "Activate your account",
-    //     template: "activation-mail.ejs",
-    //     data
-    // })
-    // res.status(201).json({
-    //     success: true,
-    //     message: `Please check your mail: ${user.email} to activate your account`,
-    //    token: activationToken.token
-    // })
 }
 )
 
