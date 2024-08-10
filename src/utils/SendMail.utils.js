@@ -3,12 +3,12 @@ const path=require('path');
 const ejs=require('ejs')
 const sendEmail=async(options)=>{
     const  transporter=nodemailer.createTransport({
-        host:process.env.SMTP_HOST,
-        port:parseInt(process.env.SMTP_PORT||'587'),
-        service:process.env.SMTP_SERVICE,
+        host:"smtp.gmail.com",
+        port:parseInt(465||'587'),
+        service:'gmail',
         auth:{
-            user:process.env.SMTP_MAIL,
-            pass:process.env.SMTP_PASSWORD
+            user:'imnikku11@gmail.com',
+            pass:'yuvf axvd jlfr wiln'
         }
         
 

@@ -42,7 +42,7 @@ const {accessTokenOptions, refreshTokenOptions, sendToken}=require("../utils/Jwt
 
  const createActivationToken = (user) => {
     const activationCode = Math.floor(1000 + Math.random() * 9000).toString();
-    const token = jwt.sign({ user, activationCode }, process.env.ACTIVATION_SECRET , {
+    const token = jwt.sign({ user, activationCode }, 'HELLOLMSMERNPROJECT' , {
         expiresIn: '5m'
     })
     return { activationCode, token }
