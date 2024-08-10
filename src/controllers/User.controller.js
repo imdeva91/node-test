@@ -30,7 +30,7 @@ const {accessTokenOptions, refreshTokenOptions, sendToken}=require("../utils/Jwt
     })
     res.status(201).json({
         success: true,
-        message: `Please check your mail: ${user.email} to activate your account`,
+        message: 'Veriy your email.',
        token: activationToken.token
     })
 }

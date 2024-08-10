@@ -2,6 +2,8 @@ const express=require('express')
 const cors=require('cors')
 const cookieParser=require('cookie-parser');
 const userRoute=require('./routes/User.route')
+const codeRoute=require('./routes/Code.route .js')
+
 const  ErrorMiddleware  =require('./middleware/Error.middleware.js')
 const app=express()
 
@@ -22,7 +24,9 @@ app.use(cors())
 
 // route ................... 
 
-app.use('/api/v1',userRoute)
+app.use('/user',userRoute)
+app.use('/code',codeRoute)
+
 // Test api ....
 app.get('/',async(req,res,next)=>{
 
